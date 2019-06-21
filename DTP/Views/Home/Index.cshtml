@@ -1,0 +1,19 @@
+﻿@model DTP.ViewModels.GameSessionViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>Games</h1>
+@foreach (var g in Model.Games)
+{
+    <div>
+        <ul>
+            <li>@g.Name</li>
+            <li>Max Players: @g.MaxPlayers</li>
+            <li>Current Players: @g.CurrentPlayers</li>
+        </ul>
+
+    </div>
+    <a asp-controller="JoinedGames" asp-action="JoinGame" asp-route-gameID="@g.ID" class="btn btn-sm btn-default confirm">Join</a>
+    <a asp-controller="JoinedGames" asp-action="LeaveGame" asp-route-gameID="@g.ID" class="btn btn-sm btn-default confirm">Leave</a>
+}
