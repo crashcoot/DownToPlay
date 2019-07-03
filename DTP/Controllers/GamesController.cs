@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DTP.Data;
 using DTP.Models;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace DTP.Controllers
 {
     public class GamesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public GamesController(ApplicationDbContext context)
+        public GamesController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Games
@@ -54,15 +58,17 @@ namespace DTP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,MinPlayers,MaxPlayers,CurrentPlayers")] Game game)
+        public async Task<IActionResult> Create([Bind("ID,Name,MinPlayers,MaxPlayers")] Game game)
         {
             if (ModelState.IsValid)
             {
+                game.CurrentPlayers = 0;
+                game.CreatedBy = GetCurrentUserID();
                 _context.Add(game);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "GameSessions");
             }
-            return View(game);
+            return RedirectToAction("Index", "GameSessions");
         }
 
         // GET: Games/Edit/5
@@ -86,7 +92,7 @@ namespace DTP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,MinPlayers,MaxPlayers,CurrentPlayers")] Game game)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,MinPlayers,MaxPlayers")] Game game)
         {
             if (id != game.ID)
             {
@@ -97,6 +103,7 @@ namespace DTP.Controllers
             {
                 try
                 {
+                    game.CreatedBy = GetCurrentUserID();
                     _context.Update(game);
                     await _context.SaveChangesAsync();
                 }
@@ -111,7 +118,7 @@ namespace DTP.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "GameSessions");
             }
             return View(game);
         }
@@ -142,12 +149,17 @@ namespace DTP.Controllers
             var game = await _context.Game.FindAsync(id);
             _context.Game.Remove(game);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "GameSessions");
         }
 
         private bool GameExists(int id)
         {
             return _context.Game.Any(e => e.ID == id);
+        }
+
+        public string GetCurrentUserID()
+        {
+            return _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
     }
 }

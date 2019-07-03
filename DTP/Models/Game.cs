@@ -12,5 +12,7 @@ namespace DTP.Models
         public int MinPlayers { get; set; }
         public int MaxPlayers { get; set; }
         public int CurrentPlayers { get; set; }
+
+        public string CreatedBy { get; set; }
     }
 }

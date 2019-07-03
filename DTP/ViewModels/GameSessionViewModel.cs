@@ -11,5 +11,6 @@ namespace DTP.ViewModels
         public List<JoinedGame> JoinedGames { get; set; }
         public List<Game> Games { get; set; }
         public string CurrentUserID { get; set; }
+        public List<int> UsersJoinedGameIDS = new List<int>();
     }
 }

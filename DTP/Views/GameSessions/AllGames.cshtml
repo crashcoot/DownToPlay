@@ -1,0 +1,45 @@
+﻿@model DTP.ViewModels.GameSessionViewModel
+@{
+    ViewBag.Title = "All Games";
+}
+<p>
+    <a asp-controller="Games" asp-action="Create">Create New</a>
+</p>
+<h1>@ViewBag.Title</h1>
+@foreach (var g in Model.Games)
+{
+<div>
+    <h2>@g.Name</h2>
+    <ul>
+        <li>Min Players: @g.MinPlayers</li>
+        <li>Max Players: @g.MaxPlayers</li>
+        <li>Current Players: @g.CurrentPlayers</li>
+        <ul>
+            @foreach (var jg in Model.JoinedGames)
+            {
+                if (jg.GameID == g.ID)
+                {
+                    <li>@jg.UserID</li>
+                }
+            }
+        </ul>
+    </ul>
+    @if (g.CurrentPlayers >= g.MinPlayers)
+    {
+        <p>GO GAME</p>
+    }
+</div>
+    @if (Model.UsersJoinedGameIDS.Contains(g.ID))
+    {
+        <a asp-controller="GameSessions" asp-action="LeaveGame" asp-route-gameID="@g.ID" class="btn btn-sm btn-default confirm">Leave</a>
+    }
+    else if (Model.CurrentUserID != null)
+    {
+        <a asp-controller="GameSessions" asp-action="JoinGame" asp-route-gameID="@g.ID" class="btn btn-sm btn-default confirm">Join</a>
+    }
+    @if (g.CreatedBy == Model.CurrentUserID)
+    {
+        <a asp-controller="Games" asp-action="Edit" asp-route-id="@g.ID" class="btn btn-sm btn-default confirm">Edit</a>
+        <a asp-controller="Games" asp-action="Delete" asp-route-id="@g.ID" class="btn btn-sm btn-default confirm">Delete</a>
+    }
+}

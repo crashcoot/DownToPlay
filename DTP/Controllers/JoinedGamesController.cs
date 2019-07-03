@@ -17,38 +17,17 @@ namespace DTP.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public JoinedGamesController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        public JoinedGamesController(ApplicationDbContext context)
         {
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
         }
 
-        public ActionResult JoinGame(int gameID)
-        {
-            string userID = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            JoinedGame tmp = new JoinedGame();
-            tmp.GameID = gameID;
-            tmp.UserID = userID;
-            _context.JoinedGame.Add(tmp);
-            Game gameEntity = _context.Game.Find(gameID);
-            gameEntity.CurrentPlayers++;
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Home");
-        }
+        
 
-        public ActionResult LeaveGame(int gameID)
-        {
-            string userID = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            JoinedGame jg = _context.JoinedGame.Where(x => x.GameID == gameID && x.UserID == userID).FirstOrDefault();
-            Game gameEntity = _context.Game.Find(gameID);
-            if (jg != null)
-            {
-                _context.Remove(jg);
-                gameEntity.CurrentPlayers--;
-                _context.SaveChanges();
-            }
-            return RedirectToAction("Index", "Home");
-        }
+        
+
+        
+
 
         // GET: JoinedGames
         public async Task<IActionResult> Index()

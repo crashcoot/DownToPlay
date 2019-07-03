@@ -15,11 +15,7 @@ namespace DTP.Controllers
         private readonly ApplicationDbContext _context;
         public IActionResult Index()
         {
-            GameSessionViewModel GameSessionViewModel = new GameSessionViewModel();
-            GameSessionViewModel.JoinedGames = _context.JoinedGame.ToList();
-            GameSessionViewModel.Games = _context.Game.ToList();
-
-            return View(GameSessionViewModel);
+            return View();
         }
 
         public HomeController(ApplicationDbContext db)
