@@ -21,7 +21,7 @@
             {
                 if (jg.GameID == g.ID)
                 {
-                    <li>@jg.UserID</li>
+                    <li>@jg.Username</li>
                 }
             }
         </ul>
@@ -31,7 +31,7 @@
         <p>GO GAME</p>
     }
 </div>
-        @if (Model.UsersJoinedGameIDS.Contains(g.ID))
+        @if (Model.CurrentUserGames.Contains(g.ID))
         {
             <a asp-controller="GameSessions" asp-action="LeaveGame" asp-route-gameID="@g.ID" class="btn btn-sm btn-default confirm">Leave</a>
         }

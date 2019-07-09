@@ -7,16 +7,20 @@ using DTP.Data;
 using DTP.Models;
 using DTP.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DTP.Controllers
 {
-    public class GameSessionsController : Controller
+    public class GameSessionsController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public IActionResult Index()
+        public GameSessionsController(ApplicationDbContext db, IHttpContextAccessor httpContextAccessor) : base(db, httpContextAccessor)
+        {
+            
+        }
+
+        public new IActionResult Index()
         {
             return RedirectToAction("AllGames");
         }
@@ -31,7 +35,7 @@ namespace DTP.Controllers
             {
                 if (jg.UserID == GameSessionViewModel.CurrentUserID)
                 {
-                    GameSessionViewModel.UsersJoinedGameIDS.Add(jg.GameID);
+                    GameSessionViewModel.CurrentUserGames.Add(jg.GameID);
                 }
             }
 
@@ -48,7 +52,7 @@ namespace DTP.Controllers
             {
                 if (jg.UserID == GameSessionViewModel.CurrentUserID)
                 {
-                    GameSessionViewModel.UsersJoinedGameIDS.Add(jg.GameID);
+                    GameSessionViewModel.CurrentUserGames.Add(jg.GameID);
                 }
             }
 
@@ -65,17 +69,13 @@ namespace DTP.Controllers
             {
                 if (jg.UserID == GameSessionViewModel.CurrentUserID)
                 {
-                    GameSessionViewModel.UsersJoinedGameIDS.Add(jg.GameID);
+                    GameSessionViewModel.CurrentUserGames.Add(jg.GameID);
                 }
             }
 
             return View(GameSessionViewModel);
         }
-        public GameSessionsController(ApplicationDbContext db, IHttpContextAccessor httpContextAccessor)
-        {
-            _context = db;
-            _httpContextAccessor = httpContextAccessor;
-        }
+        
 
         public ActionResult JoinGame(int gameID, string view)
         {
@@ -85,6 +85,7 @@ namespace DTP.Controllers
                 JoinedGame tmp = new JoinedGame();
                 tmp.GameID = gameID;
                 tmp.UserID = userID;
+                tmp.Username = _context.Users.Find(userID).UserName;
                 _context.JoinedGame.Add(tmp);
                 Game gameEntity = _context.Game.Find(gameID);
                 gameEntity.CurrentPlayers++;
@@ -105,11 +106,6 @@ namespace DTP.Controllers
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");
-        }
-
-        public string GetCurrentUserID()
-        {
-            return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
         public bool UserInGame(int gameID)

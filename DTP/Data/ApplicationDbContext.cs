@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using DTP.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DTP.Data
 {
@@ -15,5 +16,6 @@ namespace DTP.Data
         }
         public DbSet<DTP.Models.Game> Game { get; set; }
         public DbSet<DTP.Models.JoinedGame> JoinedGame { get; set; }
+        public DbSet<IdentityUser> Users { get; set; }
     }
 }

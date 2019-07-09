@@ -10,5 +10,6 @@ namespace DTP.Models
         public int ID { get; set; }
         public int GameID { get; set; }
         public string UserID { get; set; }
+        public string Username { get; set; }
     }
 }

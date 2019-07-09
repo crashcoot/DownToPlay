@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using DTP.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DTP.Services;
 
 namespace DTP
 {
@@ -41,6 +42,9 @@ namespace DTP
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

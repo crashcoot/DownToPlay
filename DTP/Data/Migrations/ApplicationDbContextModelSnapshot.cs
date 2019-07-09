@@ -50,6 +50,8 @@ namespace DTP.Data.Migrations
 
                     b.Property<string>("UserID");
 
+                    b.Property<string>("Username");
+
                     b.HasKey("ID");
 
                     b.ToTable("JoinedGame");

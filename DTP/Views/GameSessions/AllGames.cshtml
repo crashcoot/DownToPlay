@@ -1,4 +1,5 @@
 ﻿@model DTP.ViewModels.GameSessionViewModel
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewBag.Title = "All Games";
 }
@@ -8,28 +9,28 @@
 <h1>@ViewBag.Title</h1>
 @foreach (var g in Model.Games)
 {
-<div>
-    <h2>@g.Name</h2>
-    <ul>
-        <li>Min Players: @g.MinPlayers</li>
-        <li>Max Players: @g.MaxPlayers</li>
-        <li>Current Players: @g.CurrentPlayers</li>
+    <div>
+        <h2>@g.Name</h2>
         <ul>
-            @foreach (var jg in Model.JoinedGames)
-            {
-                if (jg.GameID == g.ID)
+            <li>Min Players: @g.MinPlayers</li>
+            <li>Max Players: @g.MaxPlayers</li>
+            <li>Current Players: @g.CurrentPlayers</li>
+            <ul>
+                @foreach (var jg in Model.JoinedGames)
                 {
-                    <li>@jg.UserID</li>
+                    if (jg.GameID == g.ID)
+                    {
+                        <li>@jg.Username</li>
+                    }
                 }
-            }
+            </ul>
         </ul>
-    </ul>
-    @if (g.CurrentPlayers >= g.MinPlayers)
-    {
-        <p>GO GAME</p>
-    }
-</div>
-    @if (Model.UsersJoinedGameIDS.Contains(g.ID))
+        @if (g.CurrentPlayers >= g.MinPlayers)
+        {
+            <p>GO GAME</p>
+        }
+    </div>
+    @if (Model.CurrentUserGames.Contains(g.ID))
     {
         <a asp-controller="GameSessions" asp-action="LeaveGame" asp-route-gameID="@g.ID" class="btn btn-sm btn-default confirm">Leave</a>
     }
