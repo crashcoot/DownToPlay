@@ -116,8 +116,6 @@ C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\Razor\Vie
 C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\Razor\Views\Account\VerifyAuthenticatorCode.g.cshtml.cs
 C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\Razor\Views\Account\VerifyCode.g.cshtml.cs
 C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\Razor\Views\GameSessions\AllGames.g.cshtml.cs
-C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\Razor\Views\GameSessions\YourCreatedGames.g.cshtml.cs
-C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\Razor\Views\GameSessions\YourJoinedGames.g.cshtml.cs
 C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\Razor\Views\Games\Create.g.cshtml.cs
 C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\Razor\Views\Games\Delete.g.cshtml.cs
 C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\Razor\Views\Games\Details.g.cshtml.cs
@@ -152,3 +150,4 @@ C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\bin\Debug\netcoreapp2.1\DTP.Views
 C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\bin\Debug\netcoreapp2.1\DTP.Views.pdb
 C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\DTP.Views.pdb
 C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\DTP.csproj.CopyComplete
+C:\Users\BurneyD\Documents\Code\DownToPlay\DTP\obj\Debug\netcoreapp2.1\DTP.csprojAssemblyReference.cache

@@ -15,6 +15,22 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <meta charset="utf-8">
+    <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+            wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <meta name="description" content="Web Experience Toolkit (WET) includes reusable components for building and maintaining innovative Web sites that are accessible, usable, and interoperable. These reusable components are open source software and free for use by departments and external Web communities">
+    <!--[if gte IE 9 | !IE ]><!-->
+    <link href="../wet-boew/assets/favicon.ico" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="../wet-boew/css/theme.min.css">
+    <!--<![endif]-->
+    <!--[if lt IE 9]>
+            <link href="../wet-boew/assets/favicon.ico" rel="shortcut icon" />
+            <link rel="stylesheet" href="../wet-boew/css/ie8-theme.min.css" />
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script src="../wet-boew/js/ie8-wet-boew.min.js"></script>
+            <![endif]-->
+    <noscript><link rel="stylesheet" href="../wet-boew/css/noscript.min.css" /></noscript>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -31,8 +47,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="GameSessions" asp-action="Index">All Games</a></li>
-                    <li><a asp-area="" asp-controller="GameSessions" asp-action="YourJoinedGames">Joined Games</a></li>
-                    <li><a asp-area="" asp-controller="GameSessions" asp-action="YourCreatedGames">Created Games</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
@@ -44,10 +58,10 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2019 - DTP</p>
-        </footer>
     </div>
+    <footer role="contentinfo" id="wb-info" class="visible-sm visible-md visible-lg wb-navcurr">
+        
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -68,6 +82,7 @@
                 integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
+
     </environment>
 
     @RenderSection("Scripts", required: false)

@@ -75,6 +75,11 @@ namespace DTP.Controllers
 
             return View(GameSessionViewModel);
         }
+
+        public IActionResult Test()
+        {
+            return View();
+        }
         
 
         public ActionResult JoinGame(int gameID, string view)
