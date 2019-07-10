@@ -1,11 +1,15 @@
 ﻿@model DTP.ViewModels.GameSessionViewModel
+@inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 @{
     ViewBag.Title = "All Games";
 }
-<p>
+
+@if (SignInManager.IsSignedIn(User))
+{
     <a asp-controller="Games" asp-action="Create">Create New</a>
-</p>
+}
+
 <h1>@ViewBag.Title</h1>
 @foreach (var g in Model.Games)
 {
@@ -13,10 +17,12 @@
     if (g.CurrentPlayers >= g.NeededPlayers)
     {
         borderColor = "green";
-    } else if (g.CurrentPlayers > 0)
+    }
+    else if (g.CurrentPlayers > 0)
     {
         borderColor = "orange";
-    } else
+    }
+    else
     {
         borderColor = "gainsboro";
     }
@@ -38,7 +44,7 @@
         <div style="  bottom:0; padding: 2px; text-align: center">
             @if (Model.CurrentUserGames.Contains(g.ID))
             {
-                <a asp-controller="GameSessions" asp-action="LeaveGame" asp-route-gameID="@g.ID" class="btn btn-primary confirm" >Leave</a>
+                <a asp-controller="GameSessions" asp-action="LeaveGame" asp-route-gameID="@g.ID" class="btn btn-primary confirm">Leave</a>
             }
             else if (Model.CurrentUserID != null)
             {
@@ -51,6 +57,6 @@
             }
         </div>
     </div>
-    
+
 
 }
