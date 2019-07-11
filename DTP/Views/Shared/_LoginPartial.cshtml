@@ -5,20 +5,20 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-controller="Account" asp-action="LogOff" asp-route-returnUrl="@Url.Action("Index", "GameSessions", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
+    <form id="logoffform"asp-controller="Account" asp-action="LogOff" asp-route-returnUrl="@Url.Action("Index", "GameSessions", new { area = "" })" method="post" id="logoutForm">
+        <ul class="list-inline menu" role="menubar">
             <li>
-                <a asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a role="menuitem" asp-controller="Games" asp-action="Create">Create New</a>
             </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+                <a role="menuitem" onclick="document.getElementById('logoffform').submit()">Logout</a>
             </li>
         </ul>
     </form>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="list-inline menu" role="menubar">
         <li><a asp-controller="Account" asp-action="Register">Register</a></li>
         <li><a asp-controller="Account" asp-action="Login">Login</a></li>
     </ul>

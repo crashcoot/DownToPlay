@@ -1,12 +1,10 @@
 ﻿@model DTP.Models.Game
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Game";
 }
 
-<h2>Create</h2>
-
-<h4>Game</h4>
+<h2>@ViewData["Title"]</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -30,7 +28,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Gamesessions" asp-action="AllGames">Back to List</a>
 </div>
 
 @section Scripts {

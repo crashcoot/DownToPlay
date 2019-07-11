@@ -25,6 +25,11 @@ namespace DTP.Controllers
             return RedirectToAction("AllGames");
         }
 
+        public new IActionResult Test()
+        {
+            return View();
+        }
+
         public IActionResult AllGames()
         {
             GameSessionViewModel GameSessionViewModel = new GameSessionViewModel();
@@ -74,11 +79,6 @@ namespace DTP.Controllers
             }
 
             return View(GameSessionViewModel);
-        }
-
-        public IActionResult Test()
-        {
-            return View();
         }
         
 

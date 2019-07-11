@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,10 +16,8 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <meta charset="utf-8">
-    <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
-            wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
     <meta content="width=device-width,initial-scale=1" name="viewport">
-    <meta name="description" content="Web Experience Toolkit (WET) includes reusable components for building and maintaining innovative Web sites that are accessible, usable, and interoperable. These reusable components are open source software and free for use by departments and external Web communities">
+    <meta name="description" content="DownToPlay tells you who is down to play games.">
     <!--[if gte IE 9 | !IE ]><!-->
     <link href="../wet-boew/assets/favicon.ico" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="../wet-boew/css/theme.min.css">
@@ -31,37 +29,59 @@
             <script src="../wet-boew/js/ie8-wet-boew.min.js"></script>
             <![endif]-->
     <noscript><link rel="stylesheet" href="../wet-boew/css/noscript.min.css" /></noscript>
+
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="GameSessions" asp-action="Index" class="navbar-brand">Down To Play</a>
+    <header role="banner">
+        <div id="wb-bnr">
+            <div id="wb-bar">
+                <div class="container">
+                    <div class="row">
+                        <section id="wb-lng" class="visible-md visible-lg">
+                            <h2>Language selection</h2>
+                            <ul class="text-right">
+                                <li><a lang="fr" hreflang="fr" href="..\">Français</a></li>
+                                <li class="curr">English&#32;<span>(current)</span></li>
+                            </ul>
+                        </section>
+                        <section class="wb-mb-links col-xs-12 visible-sm visible-xs" id="wb-glb-mn">
+                            <h2>Menu</h2>
+                            <ul class="pnl-btn list-inline text-right">
+                                <li><a href="#mb-pnl" title="menus" aria-controls="mb-pnl" class="overlay-lnk btn btn-sm btn-default" role="button"><span class="glyphicon glyphicon-search"><span class="glyphicon glyphicon-th-list"><span class="wb-inv">Search and menus</span></span></span></a></li>
+                            </ul>
+                            <div id="mb-pnl">
+
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="GameSessions" asp-action="Index">All Games</a></li>
-                </ul>
-                <partial name="_LoginPartial" />
+            <div class="container" style="padding: 10px">
+                <div class="row">
+                    <div id="wb-sttl" class="col-md-8">
+                        <a href="/">
+                            <span>Down To Play<span class="wb-inv">, </span></span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-
-    <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
+        <nav role="navigation" id="wb-sm" data-trgt="mb-pnl" data-ajax-replace="../ajax/sitemenu-en.html" class="wb-menu visible-md visible-lg" typeof="SiteNavigationElement">
+            <div class="container nvbar">
+                <h2>Topics menu</h2>
+                <div class="row">
+                    <ul class="list-inline menu" role="menubar">
+                        <li><a role="menuitem" href="../">All Games</a></li>
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main" property="mainContentOfPage" class="container">
         @RenderBody()
-        <hr />
-    </div>
-    <footer role="contentinfo" id="wb-info" class="visible-sm visible-md visible-lg wb-navcurr">
-        
-    </footer>
+    </main>
+    <footer role="contentinfo" id="wb-info" class="visible-sm visible-md visible-lg wb-navcurr"></footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -84,7 +104,14 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
 
     </environment>
+    <!--[if gte IE 9 | !IE ]><!-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="../wet-boew/js/wet-boew.min.js"></script>
+    <!--<![endif]-->
+    <!--[if lt IE 9]>
+            <script src="../wet-boew/js/ie8-wet-boew2.min.js"></script>
 
+            <![endif]-->
     @RenderSection("Scripts", required: false)
 </body>
 </html>
